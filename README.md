@@ -50,3 +50,10 @@ The server is listening on http://localhost:${3000}
 ctrl + c (windows)
 command + c (mac)
 ```
+
+## 開發工具
++ Node.js 4.16.0
++ Express 4.16.4
++ Express-Handlebars 3.0.0
++ Bootstrap 5.2.2
++ Font-awesome 6.2.0
