@@ -48,5 +48,5 @@ The server is listening on http://localhost:${3000}
 
 ```
 ctrl + c (windows)
-command + c
+command + c (mac)
 ```
