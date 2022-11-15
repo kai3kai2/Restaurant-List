@@ -2,12 +2,31 @@
 const express = require('express')
 const app = express()
 const port = 3000
+const mongoose = require('mongoose')
+
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 
 // load handlebars
 const exphbs = require('express-handlebars')
 
+mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+
+const db = mongoose.connection
+
+
+
 // load restaurant data
 const restaurantList = require('./restaurant.json')
+
+db.on('error', () => {
+  console.log('mongodb error!')
+})
+// set connection succesfully
+db.once('open', () => {
+  console.log('mongodb connected!')
+})
 
 // set handlebars
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
