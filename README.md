@@ -2,7 +2,7 @@
 
 
 ## 網站畫面
-![MyImage](https://github.com/kai3kai2/Restaurant-List/blob/main/picture/introduce.png)
+![MyImage](https://github.com/kai3kai2/Restaurant-List/blob/main/picture/update-CRUD-function.jpg)
 
 ## Introduce
 這是一個可以紀錄自己餐廳的網站，可以查看餐廳，可以查看詳細資訊。
@@ -46,7 +46,7 @@ MONGODB_URL=mongodb+srv://<account>:<password>@cluster0.<xxxxx>.mongodb.net/<tab
 npm run seed
 ```
 
-啟用專案在 Terminal 請輸入以下指令
+啟用專案: 在 Terminal 請輸入以下指令
 
 ```
 npm run dev
