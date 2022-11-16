@@ -2,7 +2,7 @@
 
 
 ## 網站畫面
-![MyImage](https://github.com/kai3kai2/Restaurant-List/blob/main/picture/update-CRUD-function.jpg)
+![MyImage](https://github.com/kai3kai2/Restaurant-List/blob/main/picture/update-rademe-v2.jpg)
 
 ## Introduce
 這是一個可以紀錄自己餐廳的網站，可以查看餐廳，可以查看詳細資訊。
