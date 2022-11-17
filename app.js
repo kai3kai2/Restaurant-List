@@ -82,15 +82,16 @@ app.post('/restaurants/:id/edit', (req, res) => {
   const restaurantData = req.body
   return Restaurant.findById(id)
     .then(restaurant => {
-      restaurant.id = restaurantData.id,
-        restaurant.name = restaurantData.name,
-        restaurant.name_en = restaurantData.name_en,
-        restaurant.category = restaurantData.category,
-        restaurant.image = restaurantData.image,
-        restaurant.location = restaurantData.location,
-        restaurant.google_map = restaurantData.google_map,
-        restaurant.rating = restaurantData.rating,
-        restaurant.description = restaurantData.description
+      restaurant.id = restaurantData.id
+      restaurant.name = restaurantData.name
+      restaurant.name_en = restaurantData.name_en
+      restaurant.category = restaurantData.category
+      restaurant.image = restaurantData.image
+      restaurant.location = restaurantData.location
+      restaurant.phone = restaurantData.phone
+      restaurant.google_map = restaurantData.google_map
+      restaurant.rating = restaurantData.rating
+      restaurant.description = restaurantData.description
       return restaurant.save()
     })
     .then(() => res.redirect(`/restaurants/${id}`))
@@ -98,10 +99,14 @@ app.post('/restaurants/:id/edit', (req, res) => {
 })
 
 // delete function
-app.get('/restaurants/:id/delete', (req, res) => {
+app.post('/restaurants/:id/delete', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
-    .then((restaurant) => restaurant.remove())
+    .then((restaurant) => {
+      if (true) {
+        restaurant.remove()
+      }
+    })
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
@@ -116,7 +121,7 @@ app.get('/search', (req, res) => {
         return restaurant.name.toLowerCase().includes(keyword.toLowerCase()) || restaurant.category.includes(keyword)
       })
       if (!searchRestaurant.length) {
-        res.render('not-found', { keyword })
+        res.render('searchNotFound', { keyword })
       } else {
         res.render('index', { restaurants: searchRestaurant, keyword: keyword })
       }
