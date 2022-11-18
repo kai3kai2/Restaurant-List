@@ -40,12 +40,13 @@
 
       <img class="rounded mx-auto d-block mb-4 w-100" src="{{restaurant.image}}" alt="{{restaurant.name}}"
         style="max-width: 600px;">
-      <span class="d-flex justify-content-end mb-4">
-        <a href="/restaurants/{{restaurant._id}}/delete" class="text-secondary"
-          onclick="confirm('Once deleted it will not be restored')">
-          <i class="fa-solid fa-trash-can fs-1"></i>
-        </a>
-      </span>
+      <form class="d-flex justify-content-end mb-4 fs-1 mx-2 d-inline m-0 "
+        action="/restaurants/{{restaurant._id}}?_method=DELETE" method="POST">
+        <button type="submit" onclick="return confirm('Once deleted it will not be restored')"
+          style="background-color: white; border: none;">
+          <i class="fa-solid fa-trash-can text-secondary"></i>
+        </button>
+      </form>
     </div>
   </div>
 </div>

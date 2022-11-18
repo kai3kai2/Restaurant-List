@@ -55,7 +55,7 @@
                 <a href="/restaurants/{{this._id}}" class="fs-5 text-info mx-2" style="text-decoration: none;">
                   <i class="fa-solid fa-circle-info"></i>
                 </a>
-                <form class="fs-5 mx-2 d-inline m-0 " action="/restaurants/{{this._id}}/delete" method="POST">
+                <form class="fs-5 mx-2 d-inline m-0 " action="/restaurants/{{this._id}}?_method=DELETE" method="POST">
                   <button type="submit" onclick="return confirm('Once deleted it will not be restored')"
                     style="background-color: white; border: none;">
                     <i class="fa-solid fa-trash-can text-secondary"></i>
