@@ -34,19 +34,19 @@ router.get('/:id/edit', (req, res) => {
 
 router.put('/:id', (req, res) => {
   const id = req.params.id
-  const restaurantData = req.body
+  const { name, name_en, category, image, location, phone, google_map, rating, description } = req.body
   return Restaurant.findById(id)
     .then(restaurant => {
-      restaurant.id = restaurantData.id
-      restaurant.name = restaurantData.name
-      restaurant.name_en = restaurantData.name_en
-      restaurant.category = restaurantData.category
-      restaurant.image = restaurantData.image
-      restaurant.location = restaurantData.location
-      restaurant.phone = restaurantData.phone
-      restaurant.google_map = restaurantData.google_map
-      restaurant.rating = restaurantData.rating
-      restaurant.description = restaurantData.description
+      restaurant.id = id
+      restaurant.name = name
+      restaurant.name_en = name_en
+      restaurant.category = category
+      restaurant.image = image
+      restaurant.location = location
+      restaurant.phone = phone
+      restaurant.google_map = google_map
+      restaurant.rating = rating
+      restaurant.description = description
       return restaurant.save()
     })
     .then(() => res.redirect(`/restaurants/${id}`))
@@ -62,22 +62,5 @@ router.delete('/:id', (req, res) => {
     })
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
-})
-
-// set serch router and function
-router.get('/search', (req, res) => {
-  const keyword = req.query.keyword.trim()
-  Restaurant.find()
-    .lean()
-    .then(restaurants => {
-      const searchRestaurant = restaurants.filter(restaurant => {
-        return restaurant.name.toLowerCase().includes(keyword.toLowerCase()) || restaurant.category.includes(keyword)
-      })
-      if (!searchRestaurant.length) {
-        res.render('searchNotFound', { keyword })
-      } else {
-        res.render('index', { restaurants: searchRestaurant, keyword: keyword })
-      }
-    })
 })
 module.exports = router
