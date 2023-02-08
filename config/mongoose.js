@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
+
+mongoose.set("strictQuery", true);
 mongoose.connect(process.env.MONGODB_URL);
 const db = mongoose.connection;
 
