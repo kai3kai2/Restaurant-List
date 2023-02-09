@@ -3,38 +3,54 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
 
+const User = require("../user");
 const Restaurant = require("../restaurant");
 const restaurantData = require("./restaurant.json").results;
 const db = require("../../config/mongoose");
-const SEED_USER = {
-  name: "user1",
-  email: "user1@example.com",
-  password: "12345678",
-};
+const SEED_USERS = [
+  {
+    name: "user1",
+    email: "user1@example.com",
+    password: "12345678",
+    restaurantIndex: [0, 1, 2],
+  },
+  {
+    name: "user2",
+    email: "user2@example.com",
+    password: "12345678",
+    restaurantIndex: [3, 4, 5],
+  },
+];
 
 db.once("open", () => {
-  // bcrypt
-  //   .genSalt(10)
-  //   .then((salt) => bcrypt.hash(SEED_USER.password, salt))
-  //   .then((hash) =>
-  //     user.create({
-  //       name: SEED_USER.name,
-  //       email: SEED_USER.email,
-  //       password: hash,
-  //     })
-  //   )
-  //   .then(user => {
-  //     const userId = user._id
-  //     for (let i = 0; i < 10; i++) {}
+  return Promise.all(
+    SEED_USERS.map((user) => {
+      const { restaurantIndex } = user;
 
-  //       })
-  //     }
-  //   })
-  console.log("mongodb connected!");
-  Restaurant.insertMany(restaurantData, { ordered: false })
-    .then(() => {
-      console.log("restaurantSeeder done!");
-      db.close();
+      return bcrypt
+        .genSalt(10)
+        .then((salt) => bcrypt.hash(user.password, salt))
+        .then((hash) =>
+          User.create({
+            name: user.name,
+            email: user.email,
+            password: hash,
+          })
+        )
+        .then((user) => {
+          const restaurants = restaurantIndex.map((index) => {
+            const restaurant = restaurantData[index];
+            restaurant.userId = user._id;
+            return restaurant;
+          });
+          return Restaurant.create(restaurants);
+        })
+        .catch((error) => console.log(error));
     })
-    .catch((err) => console.log("done"));
+  )
+    .then(() => {
+      console.log("done");
+      process.exit();
+    })
+    .catch((error) => console.log(error));
 });
