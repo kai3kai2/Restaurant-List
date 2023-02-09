@@ -8,14 +8,37 @@ router.get("/newRestaurant", (req, res) => {
 
 // new restaurant function
 router.post("/", (req, res) => {
+  const {
+    name,
+    name_en,
+    category,
+    image,
+    location,
+    phone,
+    google_map,
+    rating,
+    description,
+  } = req.body;
   const userId = req.user._id;
-  const _id = req.params.id;
-  const newRestaurant = req.body;
-  return Restaurant.create({ newRestaurant, userId })
-    .then(() => res.redirect("/"))
-    .catch((error) => console.log(error));
+  return Restaurant.create({
+    name,
+    name_en,
+    category,
+    image,
+    location,
+    phone,
+    google_map,
+    rating,
+    description,
+    userId,
+  })
+    .then(() => {
+      res.redirect("/");
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 });
-
 //  restaurant information function
 router.get("/:id", (req, res) => {
   const userId = req.user._id;

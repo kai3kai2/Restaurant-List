@@ -4,10 +4,11 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
 
-mongoose.set("strictQuery", true);
-mongoose.connect(process.env.MONGODB_URL);
+mongoose.connect(process.env.MONGODB_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 const db = mongoose.connection;
-
 db.on("error", () => {
   console.log("mongodb error!");
 });
