@@ -2,7 +2,7 @@
 
 ## 網站畫面
 
-![MyImage](https://github.com/kai3kai2/Restaurant-List/blob/main/picture/refactor-routes-and-mongoose.jpg)
+![MyImage](https://github.com/kai3kai2/Restaurant-List/blob/main/picture/restaurant-list_v2.png)
 
 ## Introduce
 
